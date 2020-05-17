@@ -207,11 +207,11 @@ def read_LSTM(reset_data):
 
     # load data
     if(reset_data or not os.path.exists('lstm_data_vector.npy') or not os.path.exists("lstm_labels_vector.npy")):
-        # train = pd.read_csv('train.csv')
-        train = pd.read_csv('small_train.csv')
+        train = pd.read_csv('train.csv')
+        # train = pd.read_csv('small_train.csv')
         train = train.drop('qid', axis=1)
-        # test = pd.read_csv('test.csv')
-        test = pd.read_csv('small_test.csv')
+        test = pd.read_csv('test.csv')
+        # test = pd.read_csv('small_test.csv')
         test = test.drop('qid', axis=1)
 
         training_data = train['question_text']
@@ -263,7 +263,7 @@ def do_LSTM(x_train, x_test, y_train, y_test, vocab_size, max_question_length):
     model.add(Dense(1, activation='sigmoid'))
     model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
     print(model.summary())
-    history = model.fit(x_train, y_train, validation_data=[x_test, y_test], epochs=3, batch_size=64)
+    history = model.fit(x_train, y_train, validation_data=[x_test, y_test], epochs=3, batch_size=512)
     
     print("starting predict")
     start = time.time()

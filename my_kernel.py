@@ -103,7 +103,7 @@ def do_LSTM(actual_test, x_train, x_test, y_train, y_test, vocab_size, max_quest
 	model.add(Dense(1, activation='sigmoid'))
 	model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
 	print(model.summary())
-	model.fit(x_train, y_train, epochs=3, batch_size=64)
+	model.fit(x_train, y_train, epochs=3, batch_size=512)
 	
 	print("starting predict")
 	start = time.time()
