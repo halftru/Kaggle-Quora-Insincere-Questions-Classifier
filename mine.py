@@ -263,7 +263,7 @@ def do_LSTM(x_train, x_test, y_train, y_test, vocab_size, max_question_length):
     model.add(Dense(1, activation='sigmoid'))
     model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
     print(model.summary())
-    history = model.fit(x_train, y_train, epochs=3, batch_size=64)
+    history = model.fit(x_train, y_train, validation_data=[x_test, y_test], epochs=3, batch_size=64)
     
     print("starting predict")
     start = time.time()
@@ -305,7 +305,8 @@ def main():
 
     if lstm:
         tes, history = do_LSTM(x_train, x_test, y_train, y_test, vocab_size, max_question_length)
-        plot_learning_curve(history, 'binary_crossentropy')
+        plot_learning_curve(history, 'loss')
+        plot_learning_curve(history, 'accuracy')
     else:
         # tes = linreg()
         # tes = gradboost(x_train, y_train)
